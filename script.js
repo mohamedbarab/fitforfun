@@ -1,5 +1,5 @@
 // ===============================
-// Leden database (simulatie)
+// Leden database
 // ===============================
 
 const leden = [
@@ -14,20 +14,38 @@ const leden = [
 
 
 // ===============================
-// Lid zoeken op achternaam
+// Voorbeeld reserveringen laden
+// ===============================
+
+if(!localStorage.getItem("reserveringen")){
+
+let voorbeeldReserveringen = [
+
+"Jan Jansen - Yoga",
+"Lisa Pieters - Spinning",
+"Ahmed Ali - Bootcamp",
+"Sophie Bakker - Zumba",
+"Tom De Vries - Yoga"
+
+];
+
+localStorage.setItem("reserveringen", JSON.stringify(voorbeeldReserveringen));
+
+}
+
+
+// ===============================
+// Lid zoeken
 // ===============================
 
 function zoekLid(){
 
 let input = document.getElementById("zoekInput").value.toLowerCase();
-
 let resultaat = document.getElementById("resultaat");
 
 resultaat.innerHTML = "";
 
 // UNHAPPY SCENARIO
-// gebruiker heeft niets ingevuld
-
 if(input === ""){
 
 let li = document.createElement("li");
@@ -45,11 +63,9 @@ leden.forEach(function(lid){
 if(lid.achternaam.toLowerCase().includes(input)){
 
 let li = document.createElement("li");
-
 li.textContent = lid.voornaam + " " + lid.achternaam;
 
 resultaat.appendChild(li);
-
 gevonden = true;
 
 }
@@ -57,14 +73,10 @@ gevonden = true;
 });
 
 // UNHAPPY SCENARIO
-// lid bestaat niet
-
 if(!gevonden){
 
 let li = document.createElement("li");
-
-li.textContent = "Geen lid gevonden met deze achternaam.";
-
+li.textContent = "Geen lid gevonden.";
 resultaat.appendChild(li);
 
 }
@@ -78,27 +90,33 @@ resultaat.appendChild(li);
 
 function reserveerLes(les){
 
+let naam = prompt("Voer je naam in voor de reservering:");
+
+if(!naam){
+
+alert("Je moet een naam invullen.");
+return;
+
+}
+
 let reserveringen = JSON.parse(localStorage.getItem("reserveringen")) || [];
 
+let nieuweReservering = naam + " - " + les;
+
 // UNHAPPY SCENARIO
-// les is al gereserveerd
+if(reserveringen.includes(nieuweReservering)){
 
-if(reserveringen.includes(les)){
-
-alert("Je hebt deze les al gereserveerd.");
-
+alert("Deze reservering bestaat al.");
 return;
 
 }
 
 // HAPPY SCENARIO
-// reservering toevoegen
-
-reserveringen.push(les);
+reserveringen.push(nieuweReservering);
 
 localStorage.setItem("reserveringen", JSON.stringify(reserveringen));
 
-alert("Les succesvol gereserveerd: " + les);
+alert("Reservering succesvol!");
 
 }
 
@@ -113,15 +131,14 @@ let lijst = document.getElementById("reserveringLijst");
 
 if(!lijst) return;
 
+lijst.innerHTML = "";
+
 let reserveringen = JSON.parse(localStorage.getItem("reserveringen")) || [];
 
 // UNHAPPY SCENARIO
-// geen reserveringen
-
 if(reserveringen.length === 0){
 
 let li = document.createElement("li");
-
 li.textContent = "Er zijn nog geen reserveringen.";
 
 lijst.appendChild(li);
@@ -131,13 +148,10 @@ return;
 }
 
 // HAPPY SCENARIO
-// reserveringen tonen
-
-reserveringen.forEach(function(les){
+reserveringen.forEach(function(res){
 
 let li = document.createElement("li");
-
-li.textContent = les;
+li.textContent = res;
 
 lijst.appendChild(li);
 
@@ -145,4 +159,5 @@ lijst.appendChild(li);
 
 }
 
+// automatisch uitvoeren
 toonReserveringen();

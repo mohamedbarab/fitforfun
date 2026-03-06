@@ -1,37 +1,48 @@
-/* Algemene pagina styling */
 body{
-font-family: Arial;
+font-family: Arial, sans-serif;
+background-color:#f4f6f8;
 margin:40px;
-background-color:#f4f4f4;
 }
 
-/* Titel styling */
 h1{
 color:#2c3e50;
 }
 
-/* Navigatie links */
+nav{
+margin-bottom:20px;
+}
+
 nav a{
 margin-right:20px;
 text-decoration:none;
 font-weight:bold;
-color:#3498db;
+color:#2980b9;
 }
 
-/* Hover effect */
 nav a:hover{
 text-decoration:underline;
 }
 
-/* Tabellen styling */
 table{
-border-collapse: collapse;
-width:50%;
+border-collapse:collapse;
+width:500px;
+background:white;
 }
 
-/* Tabel cellen */
 th, td{
-border:1px solid black;
+border:1px solid #ccc;
 padding:10px;
-text-align:left;
+}
+
+button{
+background-color:#27ae60;
+color:white;
+border:none;
+padding:8px 14px;
+border-radius:4px;
+cursor:pointer;
+}
+
+button:hover{
+background-color:#219150;
 }
