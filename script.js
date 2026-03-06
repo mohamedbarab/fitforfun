@@ -1,5 +1,7 @@
-// Lijst met leden van de sportschool
-// Dit is een array met objecten
+// ===============================
+// Leden database (simulatie)
+// ===============================
+
 const leden = [
 
 {voornaam:"Jan", achternaam:"Jansen"},
@@ -10,31 +12,27 @@ const leden = [
 
 ];
 
-// Functie die wordt uitgevoerd als op de knop "Zoeken" wordt geklikt
+
+// ===============================
+// Lid zoeken op achternaam
+// ===============================
+
 function zoekLid(){
 
-// De tekst die de gebruiker heeft ingevoerd ophalen
 let input = document.getElementById("zoekInput").value.toLowerCase();
 
-// De lijst waar de resultaten in komen
 let resultaat = document.getElementById("resultaat");
 
-// Resultaten eerst leeg maken
 resultaat.innerHTML = "";
 
-// Door alle leden heen lopen
 leden.forEach(function(lid){
 
-// Controleren of de ingevoerde tekst in de achternaam zit
 if(lid.achternaam.toLowerCase().includes(input)){
 
-// Nieuw lijst item maken
 let li = document.createElement("li");
 
-// Naam tonen
 li.textContent = lid.voornaam + " " + lid.achternaam;
 
-// Toevoegen aan de resultaten lijst
 resultaat.appendChild(li);
 
 }
@@ -42,3 +40,52 @@ resultaat.appendChild(li);
 });
 
 }
+
+
+// ===============================
+// Les reserveren
+// ===============================
+
+function reserveerLes(les){
+
+// Haal bestaande reserveringen op uit localStorage
+let reserveringen = JSON.parse(localStorage.getItem("reserveringen")) || [];
+
+// Voeg nieuwe reservering toe
+reserveringen.push(les);
+
+// Opslaan
+localStorage.setItem("reserveringen", JSON.stringify(reserveringen));
+
+// Bericht tonen
+alert("Les gereserveerd: " + les);
+
+}
+
+
+// ===============================
+// Reserveringen tonen
+// ===============================
+
+function toonReserveringen(){
+
+let lijst = document.getElementById("reserveringLijst");
+
+if(!lijst) return;
+
+let reserveringen = JSON.parse(localStorage.getItem("reserveringen")) || [];
+
+reserveringen.forEach(function(les){
+
+let li = document.createElement("li");
+
+li.textContent = les;
+
+lijst.appendChild(li);
+
+});
+
+}
+
+// Automatisch laden
+toonReserveringen();

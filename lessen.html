@@ -5,7 +5,6 @@
 <meta charset="UTF-8">
 <title>Lessen overzicht</title>
 
-<!-- CSS koppelen -->
 <link rel="stylesheet" href="style.css">
 
 </head>
@@ -14,7 +13,6 @@
 
 <h1>Lessen overzicht</h1>
 
-<!-- Navigatie -->
 <nav>
 <a href="index.html">Leden zoeken</a>
 <a href="lessen.html">Lessen overzicht</a>
@@ -23,9 +21,45 @@
 
 <hr>
 
-<!-- Overzicht van alle lessen -->
-<ul>
+<!-- User story: Lessen overzicht -->
+<table>
 
+<tr>
+<th>Les</th>
+<th>Tijd</th>
+<th>Actie</th>
+</tr>
+
+<tr>
+<td>Yoga</td>
+<td>Maandag 19:00</td>
+<td><button onclick="reserveerLes('Yoga')">Reserveer</button></td>
+</tr>
+
+<tr>
+<td>Spinning</td>
+<td>Dinsdag 18:00</td>
+<td><button onclick="reserveerLes('Spinning')">Reserveer</button></td>
+</tr>
+
+<tr>
+<td>Bootcamp</td>
+<td>Woensdag 20:00</td>
+<td><button onclick="reserveerLes('Bootcamp')">Reserveer</button></td>
+</tr>
+
+<tr>
+<td>Zumba</td>
+<td>Vrijdag 19:30</td>
+<td><button onclick="reserveerLes('Zumba')">Reserveer</button></td>
+</tr>
+
+</table>
+
+<script src="script.js"></script>
+
+</body>
+</html>
 <!-- Elke les staat in een lijst item -->
 <li>Yoga - Maandag 19:00</li>
 <li>Spinning - Dinsdag 18:00</li>
