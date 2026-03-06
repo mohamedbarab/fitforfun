@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+
+<!-- Titel van de website -->
+<title>FitForFun</title>
+
+<!-- Koppeling naar CSS bestand -->
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<!-- Hoofd titel -->
+<h1>FitForFun Sportschool</h1>
+
+<!-- Navigatie menu -->
+<nav>
+<a href="index.html">Leden zoeken</a>
+<a href="lessen.html">Lessen overzicht</a>
+<a href="reserveringen.html">Reserveringen</a>
+</nav>
+
+<hr>
+
+<!-- Zoekfunctie -->
+<h2>Lid zoeken op achternaam</h2>
+
+<!-- Input veld waar gebruiker een achternaam kan typen -->
+<input type="text" id="zoekInput" placeholder="Typ een achternaam">
+
+<!-- Knop om zoekfunctie te starten -->
+<button onclick="zoekLid()">Zoeken</button>
+
+<!-- Hier komen de zoekresultaten -->
+<ul id="resultaat"></ul>
+
+<!-- JavaScript koppelen -->
+<script src="script.js"></script>
+
+</body>
+</html>
