@@ -24,8 +24,7 @@ let voorbeeldReserveringen = [
 "Jan Jansen - Yoga",
 "Lisa Pieters - Spinning",
 "Ahmed Ali - Bootcamp",
-"Sophie Bakker - Zumba",
-"Tom De Vries - Yoga"
+"Sophie Bakker - Zumba"
 
 ];
 
@@ -40,18 +39,14 @@ localStorage.setItem("reserveringen", JSON.stringify(voorbeeldReserveringen));
 
 function zoekLid(){
 
-let input = document.getElementById("zoekInput").value.toLowerCase();
+let input = document.getElementById("zoekNaam").value.toLowerCase();
 let resultaat = document.getElementById("resultaat");
 
 resultaat.innerHTML = "";
 
-// UNHAPPY SCENARIO
 if(input === ""){
 
-let li = document.createElement("li");
-li.textContent = "Voer eerst een achternaam in.";
-resultaat.appendChild(li);
-
+resultaat.innerHTML = "Voer eerst een achternaam in.";
 return;
 
 }
@@ -62,22 +57,21 @@ leden.forEach(function(lid){
 
 if(lid.achternaam.toLowerCase().includes(input)){
 
-let li = document.createElement("li");
-li.textContent = lid.voornaam + " " + lid.achternaam;
+let p = document.createElement("p");
 
-resultaat.appendChild(li);
+p.textContent = lid.voornaam + " " + lid.achternaam;
+
+resultaat.appendChild(p);
+
 gevonden = true;
 
 }
 
 });
 
-// UNHAPPY SCENARIO
 if(!gevonden){
 
-let li = document.createElement("li");
-li.textContent = "Geen lid gevonden.";
-resultaat.appendChild(li);
+resultaat.innerHTML = "Geen lid gevonden.";
 
 }
 
@@ -103,7 +97,6 @@ let reserveringen = JSON.parse(localStorage.getItem("reserveringen")) || [];
 
 let nieuweReservering = naam + " - " + les;
 
-// UNHAPPY SCENARIO
 if(reserveringen.includes(nieuweReservering)){
 
 alert("Deze reservering bestaat al.");
@@ -111,12 +104,28 @@ return;
 
 }
 
-// HAPPY SCENARIO
 reserveringen.push(nieuweReservering);
 
 localStorage.setItem("reserveringen", JSON.stringify(reserveringen));
 
 alert("Reservering succesvol!");
+
+}
+
+
+// ===============================
+// Reservering verwijderen
+// ===============================
+
+function verwijderReservering(index){
+
+let reserveringen = JSON.parse(localStorage.getItem("reserveringen")) || [];
+
+reserveringen.splice(index,1);
+
+localStorage.setItem("reserveringen", JSON.stringify(reserveringen));
+
+toonReserveringen();
 
 }
 
@@ -135,29 +144,38 @@ lijst.innerHTML = "";
 
 let reserveringen = JSON.parse(localStorage.getItem("reserveringen")) || [];
 
-// UNHAPPY SCENARIO
 if(reserveringen.length === 0){
 
-let li = document.createElement("li");
-li.textContent = "Er zijn nog geen reserveringen.";
-
-lijst.appendChild(li);
+lijst.innerHTML = "<li>Er zijn nog geen reserveringen.</li>";
 
 return;
 
 }
 
-// HAPPY SCENARIO
-reserveringen.forEach(function(res){
+reserveringen.forEach(function(res,index){
 
 let li = document.createElement("li");
-li.textContent = res;
+
+li.textContent = res + " ";
+
+let knop = document.createElement("button");
+
+knop.textContent = "Verwijder";
+
+knop.onclick = function(){
+
+verwijderReservering(index);
+
+};
+
+li.appendChild(knop);
 
 lijst.appendChild(li);
 
 });
 
 }
+
 
 // automatisch uitvoeren
 toonReserveringen();
