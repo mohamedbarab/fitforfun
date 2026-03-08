@@ -1,6 +1,12 @@
-// ===============================
-// Leden database
-// ===============================
+// ========================================
+// FITFORFREE RESERVERING SYSTEEM
+// JavaScript bestand
+// ========================================
+
+
+// ========================================
+// Leden database (voorbeeld data)
+// ========================================
 
 const leden = [
 
@@ -13,9 +19,10 @@ const leden = [
 ];
 
 
-// ===============================
-// Voorbeeld reserveringen laden
-// ===============================
+// ========================================
+// Voorbeeld reserveringen toevoegen
+// Alleen als localStorage leeg is
+// ========================================
 
 if(!localStorage.getItem("reserveringen")){
 
@@ -33,20 +40,20 @@ localStorage.setItem("reserveringen", JSON.stringify(voorbeeldReserveringen));
 }
 
 
-// ===============================
-// Lid zoeken
-// ===============================
+// ========================================
+// Lid zoeken op achternaam
+// ========================================
 
 function zoekLid(){
 
-let input = document.getElementById("zoekNaam").value.toLowerCase();
+let input = document.getElementById("zoekInput").value.toLowerCase();
 let resultaat = document.getElementById("resultaat");
 
 resultaat.innerHTML = "";
 
 if(input === ""){
 
-resultaat.innerHTML = "Voer eerst een achternaam in.";
+resultaat.innerHTML = "<li>Voer eerst een achternaam in.</li>";
 return;
 
 }
@@ -57,11 +64,11 @@ leden.forEach(function(lid){
 
 if(lid.achternaam.toLowerCase().includes(input)){
 
-let p = document.createElement("p");
+let li = document.createElement("li");
 
-p.textContent = lid.voornaam + " " + lid.achternaam;
+li.textContent = lid.voornaam + " " + lid.achternaam;
 
-resultaat.appendChild(p);
+resultaat.appendChild(li);
 
 gevonden = true;
 
@@ -71,16 +78,16 @@ gevonden = true;
 
 if(!gevonden){
 
-resultaat.innerHTML = "Geen lid gevonden.";
+resultaat.innerHTML = "<li>Geen lid gevonden.</li>";
 
 }
 
 }
 
 
-// ===============================
+// ========================================
 // Les reserveren
-// ===============================
+// ========================================
 
 function reserveerLes(les){
 
@@ -113,11 +120,17 @@ alert("Reservering succesvol!");
 }
 
 
-// ===============================
+// ========================================
 // Reservering verwijderen
-// ===============================
+// ========================================
 
 function verwijderReservering(index){
+
+let bevestiging = confirm("Weet je zeker dat je deze reservering wilt verwijderen?");
+
+if(!bevestiging){
+return;
+}
 
 let reserveringen = JSON.parse(localStorage.getItem("reserveringen")) || [];
 
@@ -130,9 +143,9 @@ toonReserveringen();
 }
 
 
-// ===============================
+// ========================================
 // Reserveringen tonen
-// ===============================
+// ========================================
 
 function toonReserveringen(){
 
@@ -144,10 +157,15 @@ lijst.innerHTML = "";
 
 let reserveringen = JSON.parse(localStorage.getItem("reserveringen")) || [];
 
+let aantal = document.getElementById("aantal");
+
+if(aantal){
+aantal.textContent = reserveringen.length;
+}
+
 if(reserveringen.length === 0){
 
 lijst.innerHTML = "<li>Er zijn nog geen reserveringen.</li>";
-
 return;
 
 }
@@ -177,5 +195,12 @@ lijst.appendChild(li);
 }
 
 
-// automatisch uitvoeren
+// ========================================
+// Automatisch laden bij openen pagina
+// ========================================
+
+document.addEventListener("DOMContentLoaded", function(){
+
 toonReserveringen();
+
+});

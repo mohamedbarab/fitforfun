@@ -4,36 +4,125 @@
 <head>
 <meta charset="UTF-8">
 <title>FitForFun</title>
-
-<!-- CSS koppeling -->
 <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
 
-<h1>Welkom bij FitForFun</h1>
+<header>
+
+<div class="header-content">
+
+<h1>FitForFun</h1>
+<p>Train sterker. Word fitter. Reserveer je les.</p>
+
+</div>
+
+</header>
+
 
 <nav>
+
 <a href="index.html">Home</a>
 <a href="lessen.html">Lessen overzicht</a>
 <a href="reserveringen.html">Reserveringen</a>
+
 </nav>
 
-<p>Dit is de FitForFun website. Hier kun je lessen bekijken en reserveren.</p>
+
+<main class="container">
+
+
+<section class="card">
+
+<h2>Welkom bij FitForFun</h2>
+
+<p>
+FitForFun is een moderne sportschool waar leden verschillende groepslessen
+kunnen volgen zoals yoga, spinning en bootcamp. Via deze website kun je
+lessen bekijken en direct reserveren.
+</p>
+
+</section>
+
+
+
+<section class="card">
 
 <h2>Lid zoeken</h2>
 
-<!-- Zoekveld -->
 <input type="text" id="zoekInput" placeholder="Typ een achternaam">
 
-<!-- Zoek knop -->
 <button onclick="zoekLid()">Zoek lid</button>
 
-<!-- Resultaat -->
 <ul id="resultaat"></ul>
 
-<!-- Javascript -->
+</section>
+
+
+
+<section class="card">
+
+<h2>Populaire lessen</h2>
+
+<div class="lessen-grid">
+
+<div class="les-card">
+
+<h3>Yoga</h3>
+
+<p>Rustige les gericht op flexibiliteit en ontspanning.</p>
+
+<button onclick="reserveerLes('Yoga')">Reserveer</button>
+
+</div>
+
+
+<div class="les-card">
+
+<h3>Spinning</h3>
+
+<p>Intensieve fietstraining voor conditie en vetverbranding.</p>
+
+<button onclick="reserveerLes('Spinning')">Reserveer</button>
+
+</div>
+
+
+<div class="les-card">
+
+<h3>Zumba</h3>
+
+<p>Dansworkout op energieke muziek.</p>
+
+<button onclick="reserveerLes('Zumba')">Reserveer</button>
+
+</div>
+
+
+<div class="les-card">
+
+<h3>Bootcamp</h3>
+
+<p>Full body training met hoge intensiteit.</p>
+
+<button onclick="reserveerLes('Bootcamp')">Reserveer</button>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+<p>© 2025 FitForFun</p>
+
+</footer>
+
 <script src="script.js"></script>
 
 </body>
