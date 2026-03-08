@@ -1,5 +1,5 @@
 // ===============================
-// Leden database
+// Leden database (voorbeeld data)
 // ===============================
 
 const leden = [
@@ -15,6 +15,8 @@ const leden = [
 
 // ===============================
 // Voorbeeld reserveringen laden
+// Wordt alleen uitgevoerd als
+// localStorage nog leeg is
 // ===============================
 
 if(!localStorage.getItem("reserveringen")){
@@ -34,34 +36,39 @@ localStorage.setItem("reserveringen", JSON.stringify(voorbeeldReserveringen));
 
 
 // ===============================
-// Lid zoeken
+// Lid zoeken functie
 // ===============================
 
 function zoekLid(){
 
-let input = document.getElementById("zoekNaam").value.toLowerCase();
+// input veld ophalen
+let input = document.getElementById("zoekInput").value.toLowerCase();
+
+// resultaat lijst ophalen
 let resultaat = document.getElementById("resultaat");
 
 resultaat.innerHTML = "";
 
 if(input === ""){
 
-resultaat.innerHTML = "Voer eerst een achternaam in.";
+resultaat.innerHTML = "<li>Voer eerst een achternaam in.</li>";
 return;
 
 }
 
 let gevonden = false;
 
+// door alle leden heen lopen
 leden.forEach(function(lid){
 
 if(lid.achternaam.toLowerCase().includes(input)){
 
-let p = document.createElement("p");
+// li element maken
+let li = document.createElement("li");
 
-p.textContent = lid.voornaam + " " + lid.achternaam;
+li.textContent = lid.voornaam + " " + lid.achternaam;
 
-resultaat.appendChild(p);
+resultaat.appendChild(li);
 
 gevonden = true;
 
@@ -71,7 +78,7 @@ gevonden = true;
 
 if(!gevonden){
 
-resultaat.innerHTML = "Geen lid gevonden.";
+resultaat.innerHTML = "<li>Geen lid gevonden.</li>";
 
 }
 
@@ -93,10 +100,12 @@ return;
 
 }
 
+// bestaande reserveringen ophalen
 let reserveringen = JSON.parse(localStorage.getItem("reserveringen")) || [];
 
 let nieuweReservering = naam + " - " + les;
 
+// controleren of reservering al bestaat
 if(reserveringen.includes(nieuweReservering)){
 
 alert("Deze reservering bestaat al.");
@@ -104,8 +113,10 @@ return;
 
 }
 
+// reservering toevoegen
 reserveringen.push(nieuweReservering);
 
+// opslaan in localStorage
 localStorage.setItem("reserveringen", JSON.stringify(reserveringen));
 
 alert("Reservering succesvol!");
@@ -125,6 +136,7 @@ reserveringen.splice(index,1);
 
 localStorage.setItem("reserveringen", JSON.stringify(reserveringen));
 
+// opnieuw laden
 toonReserveringen();
 
 }
@@ -138,11 +150,19 @@ function toonReserveringen(){
 
 let lijst = document.getElementById("reserveringLijst");
 
+// als element niet bestaat stoppen
 if(!lijst) return;
 
 lijst.innerHTML = "";
 
 let reserveringen = JSON.parse(localStorage.getItem("reserveringen")) || [];
+
+// aantal reserveringen tonen
+let aantal = document.getElementById("aantal");
+
+if(aantal){
+aantal.textContent = reserveringen.length;
+}
 
 if(reserveringen.length === 0){
 
@@ -152,12 +172,14 @@ return;
 
 }
 
+// door reserveringen lopen
 reserveringen.forEach(function(res,index){
 
 let li = document.createElement("li");
 
 li.textContent = res + " ";
 
+// verwijder knop maken
 let knop = document.createElement("button");
 
 knop.textContent = "Verwijder";
@@ -177,5 +199,8 @@ lijst.appendChild(li);
 }
 
 
-// automatisch uitvoeren
+// ===============================
+// automatisch laden bij openen
+// ===============================
+
 toonReserveringen();

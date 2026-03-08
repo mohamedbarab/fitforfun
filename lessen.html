@@ -12,15 +12,19 @@
 
 <body>
 
+<header>
 <h1>Lessen overzicht</h1>
+</header>
 
 <nav>
-<a href="index.html">Leden zoeken</a>
+<a href="index.html">Home</a>
 <a href="lessen.html">Lessen overzicht</a>
 <a href="reserveringen.html">Reserveringen</a>
 </nav>
 
-<hr>
+<div class="container">
+
+<p>Hier kun je sportlessen bekijken en reserveren.</p>
 
 <table>
 
@@ -33,7 +37,10 @@
 <tr>
 <td>Yoga</td>
 <td>Maandag 19:00</td>
+
+<!-- Wanneer je op reserveer klikt wordt de functie reserveerLes uitgevoerd -->
 <td><button onclick="reserveerLes('Yoga')">Reserveer</button></td>
+
 </tr>
 
 <tr>
@@ -55,6 +62,8 @@
 </tr>
 
 </table>
+
+</div>
 
 <script src="script.js"></script>
 
